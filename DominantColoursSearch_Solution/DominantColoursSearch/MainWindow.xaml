@@ -5,8 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DominantColoursSearch"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        d:DataContext="{d:DesignInstance local:MainWindowViewModel}">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Width="80" Height="40" Content="Run" Click="Button_RunClick"/>
+            <Button Width="80" Height="40" Content="Load image" Click="Button_LoadImageClick" />
+
+            <Rectangle x:Name="rect1" Width="20" Height="20"/>
+            <Rectangle x:Name="rect2" Width="20" Height="20"/>
+            <Rectangle x:Name="rect3" Width="20" Height="20"/>
+            <Rectangle x:Name="rect4" Width="20" Height="20"/>
+            <Rectangle x:Name="rect5" Width="20" Height="20"/>
+            <Rectangle x:Name="rect6" Width="20" Height="20"/>
+            <Rectangle x:Name="rect7" Width="20" Height="20"/>
+            <Rectangle x:Name="rect8" Width="20" Height="20"/>
+            <Rectangle x:Name="rect9" Width="20" Height="20"/>
+            <Rectangle x:Name="rect10" Width="20" Height="20"/>
+        </StackPanel>
+
+        <Image x:Name="imgContainer" Grid.Row="1"/>
         
     </Grid>
 </Window>
