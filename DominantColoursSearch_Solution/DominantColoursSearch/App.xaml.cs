@@ -13,5 +13,18 @@ namespace DominantColoursSearch
     /// </summary>
     public partial class App : Application
     {
+        App()
+        {
+            InitializeComponent();
+        }
+
+        [STAThread]
+        static void Main(string[] args)
+        {
+            App application = new App();
+            MainWindow mainWindow = new MainWindow();
+
+            application.Run(mainWindow);
+        }
     }
 }
