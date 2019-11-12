@@ -84,6 +84,7 @@
       <DependentUpon>ImageResultInfoControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ViewModels\ImageResultInfoControlViewModel.cs" />
+    <Compile Include="CustomClasses\AnalyzedPictureInfo.cs" />
     <Compile Include="CustomClasses\PictureDominantColorInfoItem.cs" />
     <Compile Include="Utility.cs" />
     <Page Include="App.xaml">
