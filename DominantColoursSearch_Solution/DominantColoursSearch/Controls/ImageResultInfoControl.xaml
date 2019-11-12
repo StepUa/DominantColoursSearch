@@ -20,18 +20,20 @@
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
-            <Image x:Name="imageImageContainer"/>
+            <Image x:Name="imageImageContainer" Source="{Binding ImageResultInfo.AnalyzedImageWithClusters}"/>
 
-            <ItemsControl x:Name="itemsControlPictureColorInfoContainer" Grid.Row="1" ItemsSource="{Binding ImageResultInfoCollection}">
+            <ItemsControl x:Name="itemsControlPictureColorInfoContainer" Grid.Row="1" ItemsSource="{Binding ImageResultInfo.DominantColours}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
 
                 <ItemsControl.ItemTemplate>
                     <DataTemplate DataType="{x:Type customClasses:PictureDominantColorInfoItem}">
-                        <TextBlock Width="80" Height="40" Text="{Binding HexValue, Mode=OneWay}" Background="{Binding ColorBrush, Mode=OneWay}"/>
+                        <TextBox Width="80" Height="40" Text="{Binding HexValue, Mode=OneWay}" Background="{Binding ColorBrush, Mode=OneWay}"
+                                 TextAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="True" IsReadOnlyCaretVisible="False" 
+                                 TextWrapping="Wrap" BorderThickness="0"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
