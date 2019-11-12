@@ -12,18 +12,18 @@ namespace DominantColoursSearch.Controls.ViewModels
 {
     public class ImageResultInfoControlViewModel : INotifyPropertyChanged
     {
-        private ObservableCollection<PictureDominantColorInfoItem> _imageResultInfoCollection;
-        public ObservableCollection<PictureDominantColorInfoItem> ImageResultInfoCollection
+        private AnalyzedPictureInfo _imageResultInfo;
+        public AnalyzedPictureInfo ImageResultInfo
         {
-            get => this._imageResultInfoCollection;
+            get => this._imageResultInfo;
             set
             {
-                if (Object.ReferenceEquals(this._imageResultInfoCollection, value))
+                if (Object.ReferenceEquals(this._imageResultInfo, value))
                 {
                     return;
                 }
 
-                this._imageResultInfoCollection = value;
+                this._imageResultInfo = value;
 
                 OnPropertyChanged();
             }
