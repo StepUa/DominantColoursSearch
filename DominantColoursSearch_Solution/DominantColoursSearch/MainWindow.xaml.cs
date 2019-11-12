@@ -13,7 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DominantColoursSearch.Controls.ViewModels;
 using DominantColoursSearch.PictureLoading;
+using DominantColoursSearch.DominantColoursAnalysis;
 
 namespace DominantColoursSearch
 {
@@ -31,6 +33,12 @@ namespace DominantColoursSearch
             InitializeComponent();
         }
 
+        public ImageResultInfoControlViewModel ImageResultInfoControlViewModel
+        {
+            get => this.imageResultInfoControlContainer?.DataContext as ImageResultInfoControlViewModel;
+        }
+
+        public int SelectedImageIndex { get; set; }
 
         private PictureLoadingWindow PictureLoadingWindow { get; set; }
         private MainWindowViewModel ViewModel { get; set; }
@@ -40,38 +48,37 @@ namespace DominantColoursSearch
             this.PictureLoadingWindow = new PictureLoadingWindow();
 
             this.PictureLoadingWindow.ShowDialog();
+
+            this.ViewModel.InitializeViewModel(this.PictureLoadingWindow.FileNames, SetImageOnAnalysisCompleteEvent);
         }
 
-        DominantColoursAnalysis.DominantColoursAnalyzer Analyzer = new DominantColoursAnalysis.DominantColoursAnalyzer();
+        private void SetImageOnAnalysisCompleteEvent(object sender, EventArgs e)
+        {
+            if (!(sender is DominantColoursAnalyzer analyzer))
+            {
+                return;
+            }
+
+            if (this.SelectedImageIndex != analyzer.UniqueIndex)
+            {
+                return;
+            }
+
+            this.Dispatcher.Invoke(() => this.ImageResultInfoControlViewModel.ImageResultInfo = analyzer.AnalyzedPictureInfo);
+
+            analyzer.AnalysisCompleteEvent -= SetImageOnAnalysisCompleteEvent;
+        }
 
         private async void Button_RunClick(object sender, RoutedEventArgs e)
         {
-            await RunAnalyze();
-            BitmapSource bitmapSource = Utility.ToBitmapSource(Analyzer.AnalizedImage.ToBitmap());
-            Analyzer.AnalizedImage.Dispose();
-
-            this.imgContainer.Source = bitmapSource;
-
-
-            this.rect1.Fill = new SolidColorBrush(Color.FromRgb((byte)Analyzer.clusters[0].Color.V2, (byte)Analyzer.clusters[0].Color.V1, (byte)Analyzer.clusters[0].Color.V0));
-            this.rect2.Fill = new SolidColorBrush(Color.FromRgb((byte)Analyzer.clusters[1].Color.V2, (byte)Analyzer.clusters[1].Color.V1, (byte)Analyzer.clusters[1].Color.V0));
-            this.rect3.Fill = new SolidColorBrush(Color.FromRgb((byte)Analyzer.clusters[2].Color.V2, (byte)Analyzer.clusters[2].Color.V1, (byte)Analyzer.clusters[2].Color.V0));
-            this.rect4.Fill = new SolidColorBrush(Color.FromRgb((byte)Analyzer.clusters[3].Color.V2, (byte)Analyzer.clusters[3].Color.V1, (byte)Analyzer.clusters[3].Color.V0));
-            this.rect5.Fill = new SolidColorBrush(Color.FromRgb((byte)Analyzer.clusters[4].Color.V2, (byte)Analyzer.clusters[4].Color.V1, (byte)Analyzer.clusters[4].Color.V0));
-            this.rect6.Fill = new SolidColorBrush(Color.FromRgb((byte)Analyzer.clusters[5].Color.V2, (byte)Analyzer.clusters[5].Color.V1, (byte)Analyzer.clusters[5].Color.V0));
-            this.rect7.Fill = new SolidColorBrush(Color.FromRgb((byte)Analyzer.clusters[6].Color.V2, (byte)Analyzer.clusters[6].Color.V1, (byte)Analyzer.clusters[6].Color.V0));
-            this.rect8.Fill = new SolidColorBrush(Color.FromRgb((byte)Analyzer.clusters[7].Color.V2, (byte)Analyzer.clusters[7].Color.V1, (byte)Analyzer.clusters[7].Color.V0));
-            this.rect9.Fill = new SolidColorBrush(Color.FromRgb((byte)Analyzer.clusters[8].Color.V2, (byte)Analyzer.clusters[8].Color.V1, (byte)Analyzer.clusters[8].Color.V0));
-            this.rect10.Fill = new SolidColorBrush(Color.FromRgb((byte)Analyzer.clusters[9].Color.V2, (byte)Analyzer.clusters[9].Color.V1, (byte)Analyzer.clusters[9].Color.V0));
-        }
-
-        private Task<BitmapSource> RunAnalyze()
-        {
-            return Task.Run(() =>
+            try
             {
-                BitmapSource bitmapSource = Analyzer.Function(this.PictureLoadingWindow.FileNames[0]);
-                return bitmapSource;
-            });
+                await this.ViewModel.StartImageProcessingAsync().ConfigureAwait(false); ;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
