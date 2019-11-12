@@ -28,6 +28,7 @@ namespace DominantColoursSearch.DominantColoursAnalysis
             };
         }
 
+        public bool IsFinished { get; private set; }
         public Image<Bgr, Byte> SourceImage { get; set; }
         public Image<Bgr, Byte> AnalizedImage { get; set; }
         public ColorCluster[] clusters;
@@ -43,6 +44,8 @@ namespace DominantColoursSearch.DominantColoursAnalysis
 
         public BitmapSource Function(string fileName)
         {
+            this.IsFinished = false;
+
             //string fileName = "test.jpg";
 
             // it's recomennded to call Dispose() method because Image class contains IplImg structure
@@ -141,7 +144,11 @@ namespace DominantColoursSearch.DominantColoursAnalysis
             this.SourceImage.Dispose();
             //Engine.AnalizedImage.Dispose();
 
-            return Utility.ToBitmapSource(image);
+            var returnValue = Utility.ToBitmapSource(image);
+
+            this.IsFinished = true;
+
+            return returnValue;
         }
 
         private void ClusterVisualization(Image<Bgr, Byte> image, int[,] clusterIndexes)
