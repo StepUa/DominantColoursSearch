@@ -15,7 +15,6 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -24,24 +23,7 @@
             <Button Width="80" Height="40" Content="Load image" Click="Button_LoadImageClick" />
         </StackPanel>
         
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="1">
-            <Rectangle x:Name="rect1" Width="20" Height="20"/>
-            <Rectangle x:Name="rect2" Width="20" Height="20"/>
-            <Rectangle x:Name="rect3" Width="20" Height="20"/>
-            <Rectangle x:Name="rect4" Width="20" Height="20"/>
-            <Rectangle x:Name="rect5" Width="20" Height="20"/>
-            <Rectangle x:Name="rect6" Width="20" Height="20"/>
-            <Rectangle x:Name="rect7" Width="20" Height="20"/>
-            <Rectangle x:Name="rect8" Width="20" Height="20"/>
-            <Rectangle x:Name="rect9" Width="20" Height="20"/>
-            <Rectangle x:Name="rect10" Width="20" Height="20"/>
-        </StackPanel>
-
-        <Image x:Name="imgContainer" Grid.Row="1" Grid.ColumnSpan="2"/>
-
-
-        <controls:ImageResultInfoControl Grid.Row="2" Grid.Column="1" />
-
-
+        <controls:ImageResultInfoControl x:Name="imageResultInfoControlContainer" Grid.Row="0" Grid.Column="1" 
+                                         Grid.RowSpan="2"/>
     </Grid>
 </Window>
