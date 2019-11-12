@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 using Prism.Mvvm;
 using DominantColoursSearch.DominantColoursAnalysis;
 using System.Windows.Media.Imaging;
+using NLog;
+using System.Diagnostics;
 
 namespace DominantColoursSearch
 {
     public class MainWindowViewModel : BindableBase
     {
-        public MainWindowViewModel()
-        {
-            this.Analyzer = new DominantColoursAnalyzer();
-        }
+        private Logger Logger { get; } = LogManager.GetCurrentClassLogger();
+
+        private List<Task> TasksWithAnalyzers;
 
         private string[] _fileNames;
         public string[] FileNames
@@ -33,15 +34,52 @@ namespace DominantColoursSearch
             }
         }
 
-        private DominantColoursAnalyzer Analyzer { get; set; }
+        public bool IsViewModelInitialized { get; private set; }
 
-        private Task<BitmapSource> RunAnalyze()
+        private DominantColoursAnalyzer[] Analyzers { get; set; }
+
+        public void InitializeViewModel(string[] fileNamesInput, EventHandler handler)
         {
-            return Task.Run(() =>
+            if (fileNamesInput == null)
             {
-                BitmapSource bitmapSource = Analyzer.Function(this.FileNames[0]);
-                return bitmapSource;
-            });
+                return;
+            }
+
+            this.FileNames = fileNamesInput;
+
+            this.Analyzers = new DominantColoursAnalyzer[this.FileNames.Length];
+            this.TasksWithAnalyzers = new List<Task>(this.Analyzers.Length);
+            for (int i = 0; i < this.Analyzers.Length; i++)
+            {
+                this.Analyzers[i] = new DominantColoursAnalyzer(this.FileNames[i], i);
+
+                this.Analyzers[i].AnalysisCompleteEvent -= handler;
+                this.Analyzers[i].AnalysisCompleteEvent += handler;
+            }
+
+            this.IsViewModelInitialized = true;
         }
+
+        public async Task StartImageProcessingAsync()
+        {
+            try
+            {
+                for (int i = 0; i < this.TasksWithAnalyzers.Capacity; i++)
+                {
+                    int index = i;
+                    this.TasksWithAnalyzers.Add(Task.Run(() => this.Analyzers[index].AnalysisFunction()));
+                }
+
+                // Raise exception if any
+                await Task.WhenAny(this.TasksWithAnalyzers);
+            }
+            catch (Exception ex)
+            {
+                this.Logger.Error(ex, "Error occurred in tasks with analyzers", null);
+
+                throw;
+            }
+        }
+
     }
 }
