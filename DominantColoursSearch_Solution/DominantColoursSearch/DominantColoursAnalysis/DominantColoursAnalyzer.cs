@@ -6,50 +6,104 @@ using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using Emgu.CV;
 using Emgu.CV.Structure;
+using DominantColoursSearch.CustomClasses;
+using Prism.Mvvm;
+using System.Collections.ObjectModel;
+using System.Windows.Media;
+using System.Windows;
+using System.Diagnostics;
 
 namespace DominantColoursSearch.DominantColoursAnalysis
 {
-    public class DominantColoursAnalyzer
+    public class DominantColoursAnalyzer : BindableBase
     {
-        public DominantColoursAnalyzer()
+        public DominantColoursAnalyzer(string filePath, int uniqueIndex)
         {
+            this.FilePath = filePath;
+            this.UniqueIndex = uniqueIndex;
+
+            // TODO: improve this 
             this.clusters = new ColorCluster[ClusterNumber]
             {
-                new ColorCluster(){NewColor = new MCvScalar(0, 0, 255)}, // red
+                new ColorCluster(){NewColor = new MCvScalar(0, 0, 255)},
                 new ColorCluster(){NewColor = new MCvScalar(0, 100, 255)},
                 new ColorCluster(){NewColor = new MCvScalar(0, 255, 255)},
                 new ColorCluster(){NewColor = new MCvScalar(0, 255, 0)},
                 new ColorCluster(){NewColor = new MCvScalar(255, 170, 60)},
                 new ColorCluster(){NewColor = new MCvScalar(255, 0, 0)},
                 new ColorCluster(){NewColor = new MCvScalar(255, 0, 194)},
-                new ColorCluster(){NewColor = new MCvScalar(203, 192, 255)}, // pink
-                new ColorCluster(){NewColor = new MCvScalar(153, 255, 153)}, // light green
-                new ColorCluster(){NewColor = new MCvScalar(0, 75, 150)} // brown
+                new ColorCluster(){NewColor = new MCvScalar(203, 192, 255)},
+                new ColorCluster(){NewColor = new MCvScalar(153, 255, 153)},
+                new ColorCluster(){NewColor = new MCvScalar(0, 75, 150)}
             };
         }
 
-        public bool IsFinished { get; private set; }
+        public event EventHandler AnalysisCompleteEvent;
+
+        public int UniqueIndex { get; set; }
+
+        private AnalyzedPictureInfo _analyzedPictureInfo;
+        public AnalyzedPictureInfo AnalyzedPictureInfo
+        {
+            get => this._analyzedPictureInfo;
+            private set
+            {
+                if (Object.ReferenceEquals(this._analyzedPictureInfo, value))
+                {
+                    return;
+                }
+
+                this._analyzedPictureInfo = value;
+
+                RaisePropertyChanged();
+            }
+        }
+
+        private bool _isFinished;
+        public bool IsFinished
+        {
+            get => this._isFinished;
+            set
+            {
+                if (this._isFinished.Equals(value))
+                {
+                    return;
+                }
+
+                bool oldValue = this._isFinished;
+
+                this._isFinished = value;
+
+                if (!oldValue && this._isFinished)
+                {
+                    OnAnalysisCompleteEvent();
+                }
+            }
+        }
+
+        public string FilePath { get; private set; }
+
         public Image<Bgr, Byte> SourceImage { get; set; }
+
         public Image<Bgr, Byte> AnalizedImage { get; set; }
+
         public ColorCluster[] clusters;
+
         public const int ClusterNumber = 10;
 
         private static double Rgb_Euclidean(MCvScalar point1, MCvScalar point2)
         {
             return Math.Sqrt((point1.V0 - point2.V0) * (point1.V0 - point2.V0) +
                 (point1.V1 - point2.V1) * (point1.V1 - point2.V1) +
-                (point1.V2 - point2.V2) * (point1.V2 - point2.V2) +
-                (point1.V3 - point2.V3) * (point1.V3 - point2.V3));
+                (point1.V2 - point2.V2) * (point1.V2 - point2.V2));
         }
 
-        public BitmapSource Function(string fileName)
+        public void AnalysisFunction()
         {
             this.IsFinished = false;
 
-            //string fileName = "test.jpg";
-
             // it's recomennded to call Dispose() method because Image class contains IplImg structure
-            this.SourceImage = new Image<Bgr, Byte>(fileName);
+            this.SourceImage = new Image<Bgr, Byte>(this.FilePath);
 
             // resize image for better performance [optional]
             //Engine.SourceImage = Engine.SourceImage.Resize(Engine.SourceImage.Width / 2, Engine.SourceImage.Height / 2, Inter.Linear);
@@ -62,7 +116,6 @@ namespace DominantColoursSearch.DominantColoursAnalysis
 
             double minRgbEuclidean = 0;
             double oldRgbEuclidean = 0;
-
 
             while (true)
             {
@@ -119,8 +172,8 @@ namespace DominantColoursSearch.DominantColoursAnalysis
                              this.clusters[k].NewColor.V1 / this.clusters[k].Count,
                              this.clusters[k].NewColor.V2 / this.clusters[k].Count);
 
-                    double ecli = Rgb_Euclidean(new MCvScalar(this.clusters[k].NewColor.V0, this.clusters[k].NewColor.V1, this.clusters[k].NewColor.V2, 0),
-                        new MCvScalar(this.clusters[k].Color.V0, this.clusters[k].Color.V1, this.clusters[k].Color.V2, 0));
+                    double ecli = Rgb_Euclidean(new MCvScalar(this.clusters[k].NewColor.V0, this.clusters[k].NewColor.V1, this.clusters[k].NewColor.V2),
+                        new MCvScalar(this.clusters[k].Color.V0, this.clusters[k].Color.V1, this.clusters[k].Color.V2));
                     if (ecli > minRgbEuclidean)
                     {
                         minRgbEuclidean = ecli;
@@ -139,16 +192,15 @@ namespace DominantColoursSearch.DominantColoursAnalysis
 
             ClusterVisualization(this.AnalizedImage, clusterIndexes);
 
-            var image = this.AnalizedImage.ToBitmap();
+            // TODO: change this code so object creation 
+            // (for binding to a view will) take place in SetImageOnAnalysisCompleteEvent() (MainWindow.xaml) and not here
+            Application.Current.Dispatcher.Invoke((SetAnalysisResult));
+            //SetAnalysisResult();
 
             this.SourceImage.Dispose();
-            //Engine.AnalizedImage.Dispose();
-
-            var returnValue = Utility.ToBitmapSource(image);
+            this.AnalizedImage.Dispose();
 
             this.IsFinished = true;
-
-            return returnValue;
         }
 
         private void ClusterVisualization(Image<Bgr, Byte> image, int[,] clusterIndexes)
@@ -165,5 +217,37 @@ namespace DominantColoursSearch.DominantColoursAnalysis
                 }
             }
         }
+
+        private void SetAnalysisResult()
+        {
+            var dominantColoursCollection = new ObservableCollection<PictureDominantColorInfoItem>();
+
+            this.clusters = this.clusters.OrderByDescending((colourCluster) => colourCluster.Count).ToArray();
+
+            for (int i = 0; i < this.clusters.Length; i++)
+            {
+                //Debug.WriteLine(this.clusters[i].Count);
+
+                Color color = Color.FromRgb(
+                    (byte)this.clusters[i].Color.V2,
+                    (byte)this.clusters[i].Color.V1,
+                    (byte)this.clusters[i].Color.V0);
+
+                dominantColoursCollection.Add(new PictureDominantColorInfoItem(color));
+            }
+
+            this.AnalyzedPictureInfo = new AnalyzedPictureInfo()
+            {
+                AnalyzedImage = Utility.ToBitmapSource(this.SourceImage.ToBitmap()),
+                AnalyzedImageWithClusters = Utility.ToBitmapSource(this.AnalizedImage.ToBitmap()),
+                DominantColours = dominantColoursCollection
+            };
+        }
+
+        protected virtual void OnAnalysisCompleteEvent()
+        {
+            this.AnalysisCompleteEvent?.Invoke(this, EventArgs.Empty);
+        }
+
     }
 }
