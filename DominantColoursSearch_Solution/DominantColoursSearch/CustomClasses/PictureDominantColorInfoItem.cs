@@ -9,9 +9,13 @@ using System.Windows.Media;
 
 namespace DominantColoursSearch.CustomClasses
 {
-    // TODO: add Image property, create DominantColours array and change this class' name 
     public class PictureDominantColorInfoItem : INotifyPropertyChanged
     {
+        public PictureDominantColorInfoItem(Color color)
+        {
+            this.DominantColor = color;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private Color _dominantColor;
