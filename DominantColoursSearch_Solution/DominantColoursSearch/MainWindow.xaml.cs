@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,7 @@ namespace DominantColoursSearch
             InitializeComponent();
         }
 
+
         private PictureLoadingWindow PictureLoadingWindow { get; set; }
         private MainWindowViewModel ViewModel { get; set; }
 
@@ -40,7 +42,7 @@ namespace DominantColoursSearch
             this.PictureLoadingWindow.ShowDialog();
         }
 
-        DominantColoursSearch.DominantColoursAnalysis.DominantColoursAnalyzer Analyzer = new DominantColoursAnalysis.DominantColoursAnalyzer();
+        DominantColoursAnalysis.DominantColoursAnalyzer Analyzer = new DominantColoursAnalysis.DominantColoursAnalyzer();
 
         private async void Button_RunClick(object sender, RoutedEventArgs e)
         {

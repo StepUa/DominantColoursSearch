@@ -4,19 +4,27 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DominantColoursSearch"
+        xmlns:controls="clr-namespace:DominantColoursSearch.Controls"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         d:DataContext="{d:DesignInstance local:MainWindowViewModel}">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Width="80" Height="40" Content="Run" Click="Button_RunClick"/>
             <Button Width="80" Height="40" Content="Load image" Click="Button_LoadImageClick" />
-
+        </StackPanel>
+        
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="1">
             <Rectangle x:Name="rect1" Width="20" Height="20"/>
             <Rectangle x:Name="rect2" Width="20" Height="20"/>
             <Rectangle x:Name="rect3" Width="20" Height="20"/>
@@ -29,7 +37,11 @@
             <Rectangle x:Name="rect10" Width="20" Height="20"/>
         </StackPanel>
 
-        <Image x:Name="imgContainer" Grid.Row="1"/>
-        
+        <Image x:Name="imgContainer" Grid.Row="1" Grid.ColumnSpan="2"/>
+
+
+        <controls:ImageResultInfoControl Grid.Row="2" Grid.Column="1" />
+
+
     </Grid>
 </Window>
