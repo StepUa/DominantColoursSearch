@@ -64,7 +64,7 @@ namespace DominantColoursSearch
         {
             try
             {
-                for (int i = 0; i < this.TasksWithAnalyzers.Capacity; i++)
+                for (int i = 0; i < this.Analyzers.Length; i++)
                 {
                     int index = i;
                     this.TasksWithAnalyzers.Add(Task.Run(() => this.Analyzers[index].AnalysisFunction()));
