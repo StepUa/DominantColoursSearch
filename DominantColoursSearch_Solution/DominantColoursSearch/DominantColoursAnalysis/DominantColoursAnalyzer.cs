@@ -12,11 +12,14 @@ using System.Collections.ObjectModel;
 using System.Windows.Media;
 using System.Windows;
 using System.Diagnostics;
+using NLog;
 
 namespace DominantColoursSearch.DominantColoursAnalysis
 {
     public class DominantColoursAnalyzer : BindableBase
     {
+        private Logger Logger { get; } = LogManager.GetCurrentClassLogger();
+
         public DominantColoursAnalyzer(string filePath, int uniqueIndex)
         {
             this.FilePath = filePath;
@@ -140,8 +143,8 @@ namespace DominantColoursSearch.DominantColoursAnalysis
 
                         for (k = 0; k < ClusterNumber; k++)
                         {
-                            double euclid = Rgb_Euclidean(new MCvScalar(B, G, R, 0),
-                                new MCvScalar(this.clusters[k].Color.V0, this.clusters[k].Color.V1, this.clusters[k].Color.V2, 0));
+                            double euclid = Rgb_Euclidean(new MCvScalar(B, G, R),
+                                new MCvScalar(this.clusters[k].Color.V0, this.clusters[k].Color.V1, this.clusters[k].Color.V2));
 
                             if (euclid < minRgbEuclidean)
                             {
@@ -167,20 +170,22 @@ namespace DominantColoursSearch.DominantColoursAnalysis
                         continue;
                     }
 
-                    // new color
+                    // new cluster
                     this.clusters[k].NewColor = new MCvScalar(this.clusters[k].NewColor.V0 / this.clusters[k].Count,
                              this.clusters[k].NewColor.V1 / this.clusters[k].Count,
                              this.clusters[k].NewColor.V2 / this.clusters[k].Count);
 
+                    // TODO: add Math.Round ???
                     double ecli = Rgb_Euclidean(new MCvScalar(this.clusters[k].NewColor.V0, this.clusters[k].NewColor.V1, this.clusters[k].NewColor.V2),
-                        new MCvScalar(this.clusters[k].Color.V0, this.clusters[k].Color.V1, this.clusters[k].Color.V2));
+                            new MCvScalar(this.clusters[k].Color.V0, this.clusters[k].Color.V1, this.clusters[k].Color.V2));
+
                     if (ecli > minRgbEuclidean)
                     {
                         minRgbEuclidean = ecli;
                     }
                 }
 
-                if (Math.Abs(minRgbEuclidean - oldRgbEuclidean) < 1)
+                if (Math.Abs(minRgbEuclidean - oldRgbEuclidean) < 1) // basically when they're equal
                 {
                     break;
                 }
