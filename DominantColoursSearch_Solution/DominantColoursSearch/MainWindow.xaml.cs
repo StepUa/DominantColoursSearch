@@ -59,14 +59,15 @@ namespace DominantColoursSearch
                 return;
             }
 
+            // TODO: move this to window closing event or smth
+            analyzer.AnalysisCompleteEvent -= SetImageOnAnalysisCompleteEvent;
+
             if (this.SelectedImageIndex != analyzer.UniqueIndex)
             {
                 return;
             }
 
             this.Dispatcher.Invoke(() => this.ImageResultInfoControlViewModel.ImageResultInfo = analyzer.AnalyzedPictureInfo);
-
-            analyzer.AnalysisCompleteEvent -= SetImageOnAnalysisCompleteEvent;
         }
 
         private async void Button_RunClick(object sender, RoutedEventArgs e)
