@@ -31,7 +31,7 @@
 
                 <ItemsControl.ItemTemplate>
                     <DataTemplate DataType="{x:Type customClasses:PictureDominantColorInfoItem}">
-                        <TextBox Width="80" Height="40" Text="{Binding HexValue, Mode=OneWay}" Background="{Binding ColorBrush, Mode=OneWay}"
+                        <TextBox Width="100" Height="40" Text="{Binding ColorTextRepresentation, Mode=OneWay}" Background="{Binding ColorBrush, Mode=OneWay}"
                                  TextAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="True" IsReadOnlyCaretVisible="False" 
                                  TextWrapping="Wrap" BorderThickness="0"/>
                     </DataTemplate>

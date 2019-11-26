@@ -33,7 +33,7 @@ namespace DominantColoursSearch.CustomClasses
 
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(PictureDominantColorInfoItem.ColorBrush));
-                OnPropertyChanged(nameof(PictureDominantColorInfoItem.HexValue));
+                OnPropertyChanged(nameof(PictureDominantColorInfoItem.ColorTextRepresentation));
             }
         }
 
@@ -42,9 +42,10 @@ namespace DominantColoursSearch.CustomClasses
             get => new SolidColorBrush(this.DominantColor);
         }
 
-        public string HexValue
+        public string ColorTextRepresentation
         {
-            get => this.DominantColor.ToString();
+            get => this.DominantColor.ToString() + 
+                "\n" + $"({this.DominantColor.R}, {this.DominantColor.G}, {this.DominantColor.B})";
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
