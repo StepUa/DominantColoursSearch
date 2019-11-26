@@ -24,6 +24,7 @@ namespace DominantColoursSearch.DominantColoursAnalysis
         {
             this.FilePath = filePath;
             this.UniqueIndex = uniqueIndex;
+            this.AnalysisStopwatch = new Stopwatch();
 
             // TODO: improve this 
             this.clusters = new ColorCluster[ClusterNumber]
@@ -42,8 +43,18 @@ namespace DominantColoursSearch.DominantColoursAnalysis
         }
 
         public event EventHandler AnalysisCompleteEvent;
-
         public int UniqueIndex { get; set; }
+
+        private Stopwatch AnalysisStopwatch { get; set; }
+
+        public int IterationsCount { get; private set; }
+
+        public TimeSpan AnalysisTime
+        {
+            get => this.AnalysisStopwatch == null 
+                ? new TimeSpan(0, 0, 0) 
+                : this.AnalysisStopwatch.Elapsed;
+        }
 
         private AnalyzedPictureInfo _analyzedPictureInfo;
         public AnalyzedPictureInfo AnalyzedPictureInfo
@@ -120,8 +131,13 @@ namespace DominantColoursSearch.DominantColoursAnalysis
             double minRgbEuclidean = 0;
             double oldRgbEuclidean = 0;
 
+            this.IterationsCount = 0;
+            this.AnalysisStopwatch.Restart();
+
             while (true)
             {
+                this.IterationsCount++;
+
                 for (k = 0; k < ClusterNumber; k++)
                 {
                     this.clusters[k].Count = 0;
@@ -193,6 +209,8 @@ namespace DominantColoursSearch.DominantColoursAnalysis
                 oldRgbEuclidean = minRgbEuclidean;
             }
 
+            this.AnalysisStopwatch.Stop();
+
             this.AnalizedImage = this.SourceImage.Clone();
 
             ClusterVisualization(this.AnalizedImage, clusterIndexes);
@@ -206,6 +224,13 @@ namespace DominantColoursSearch.DominantColoursAnalysis
             this.AnalizedImage.Dispose();
 
             this.IsFinished = true;
+
+            this.Logger.Info(String.Format("Analysis took {0}:{1}:{2} and {3} iterations",
+                this.AnalysisTime.Minutes,
+                this.AnalysisTime.Seconds,
+                this.AnalysisTime.Milliseconds,
+                this.IterationsCount
+                ));
         }
 
         private void ClusterVisualization(Image<Bgr, Byte> image, int[,] clusterIndexes)
