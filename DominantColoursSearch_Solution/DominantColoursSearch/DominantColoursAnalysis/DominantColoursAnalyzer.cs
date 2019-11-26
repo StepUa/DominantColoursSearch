@@ -154,7 +154,7 @@ namespace DominantColoursSearch.DominantColoursAnalysis
                         int G = (int)this.SourceImage[y, x].Green;
                         int R = (int)this.SourceImage[y, x].Red;
 
-                        minRgbEuclidean = 16581375; // 255 * 255* 255
+                        minRgbEuclidean = Double.MaxValue;
                         int clusterIndex = -1;
 
                         for (k = 0; k < ClusterNumber; k++)
