@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows;
 using System.Diagnostics;
 using NLog;
+using Emgu.CV.CvEnum;
 
 namespace DominantColoursSearch.DominantColoursAnalysis
 {
@@ -51,8 +52,8 @@ namespace DominantColoursSearch.DominantColoursAnalysis
 
         public TimeSpan AnalysisTime
         {
-            get => this.AnalysisStopwatch == null 
-                ? new TimeSpan(0, 0, 0) 
+            get => this.AnalysisStopwatch == null
+                ? new TimeSpan(0, 0, 0)
                 : this.AnalysisStopwatch.Elapsed;
         }
 
@@ -120,7 +121,10 @@ namespace DominantColoursSearch.DominantColoursAnalysis
             this.SourceImage = new Image<Bgr, Byte>(this.FilePath);
 
             // resize image for better performance [optional]
-            //Engine.SourceImage = Engine.SourceImage.Resize(Engine.SourceImage.Width / 2, Engine.SourceImage.Height / 2, Inter.Linear);
+            double sizeCrop = 1d;
+            //this.SourceImage = this.SourceImage.Resize((int)(this.SourceImage.Width / sizeCrop),
+            //    (int)(this.SourceImage.Height / sizeCrop),
+            //    Inter.Linear);
 
             int[,] clusterIndexes = new int[this.SourceImage.Height, this.SourceImage.Width];
 
@@ -220,17 +224,33 @@ namespace DominantColoursSearch.DominantColoursAnalysis
             Application.Current.Dispatcher.Invoke((SetAnalysisResult));
             //SetAnalysisResult();
 
+            // Logging
+            this.Logger.Info(String.Format("Analysis took {0}:{1}:{2} and {3} iterations. Total seconds: {4} Image size {5}x{6}",
+                this.AnalysisTime.Minutes,
+                this.AnalysisTime.Seconds,
+                this.AnalysisTime.Milliseconds,
+                this.IterationsCount,
+                this.AnalysisTime.TotalSeconds,
+                this.SourceImage.Width,
+                this.SourceImage.Height
+                ));
+
+            StringBuilder logString = new StringBuilder();
+            logString.AppendLine($"Dominant colours (sizeCrop: {sizeCrop}):");
+            for (int i = 0; i < this.clusters.Length; i++)
+            {
+                var dominantColour = this.clusters[i];
+
+                logString.AppendLine($"[{i}] ({(int)dominantColour.NewColor.V2}, {(int)dominantColour.NewColor.V1}, {(int)dominantColour.NewColor.V0})");
+            }
+
+            this.Logger.Info(logString);
+            // End of logging
+
             this.SourceImage.Dispose();
             this.AnalizedImage.Dispose();
 
             this.IsFinished = true;
-
-            this.Logger.Info(String.Format("Analysis took {0}:{1}:{2} and {3} iterations",
-                this.AnalysisTime.Minutes,
-                this.AnalysisTime.Seconds,
-                this.AnalysisTime.Milliseconds,
-                this.IterationsCount
-                ));
         }
 
         private void ClusterVisualization(Image<Bgr, Byte> image, int[,] clusterIndexes)
