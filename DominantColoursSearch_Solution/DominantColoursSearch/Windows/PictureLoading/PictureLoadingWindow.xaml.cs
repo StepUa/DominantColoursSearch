@@ -14,7 +14,7 @@ using System.Windows.Shapes;
 using Microsoft.Win32;
 using System.Diagnostics;
 
-namespace DominantColoursSearch.PictureLoading
+namespace DominantColoursSearch.Windows.PictureLoading
 {
     /// <summary>
     /// Interaction logic for PictureLoadingWindow.xaml

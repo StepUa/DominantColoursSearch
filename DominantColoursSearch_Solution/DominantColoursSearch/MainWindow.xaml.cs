@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DominantColoursSearch.Controls.ViewModels;
-using DominantColoursSearch.PictureLoading;
+using DominantColoursSearch.Windows.PictureLoading;
 using DominantColoursSearch.DominantColoursAnalysis;
 
 namespace DominantColoursSearch
