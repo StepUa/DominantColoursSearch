@@ -87,7 +87,7 @@ namespace DominantColoursSearch.DominantColoursAnalysis
         public bool IsFinished
         {
             get => this._isFinished;
-            set
+            private set
             {
                 if (this._isFinished.Equals(value))
                 {
