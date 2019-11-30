@@ -46,6 +46,15 @@ namespace DominantColoursSearch.DominantColoursAnalysis
         public event EventHandler AnalysisCompleteEvent;
         public int UniqueIndex { get; set; }
 
+        #region Analysis setup properties
+
+        public int ClustersCount { get; set; }
+        public double SizeCrop { get; set; }
+        public bool IsColourFilteringEnabled { get; set; }
+        public string FilePath { get; private set; }
+
+        #endregion
+
         private Stopwatch AnalysisStopwatch { get; set; }
 
         public int IterationsCount { get; private set; }
@@ -95,8 +104,6 @@ namespace DominantColoursSearch.DominantColoursAnalysis
                 }
             }
         }
-
-        public string FilePath { get; private set; }
 
         public Image<Bgr, Byte> SourceImage { get; set; }
 

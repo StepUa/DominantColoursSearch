@@ -34,6 +34,27 @@ namespace DominantColoursSearch
             }
         }
 
+        private string _statusText;
+        public string StatusText
+        {
+            get => this._statusText;
+            set => SetProperty(ref this._statusText, value);
+        }
+
+        private string _stausCurrentIterationsNumber;
+        public string StausCurrentIterationsNumber
+        {
+            get => this._stausCurrentIterationsNumber;
+            set => SetProperty(ref this._stausCurrentIterationsNumber, value);
+        }
+
+        private string _statusCurrentAnalysisTime;
+        public string StatusCurrentAnalysisTime
+        {
+            get => this._statusCurrentAnalysisTime;
+            set => SetProperty(ref this._statusCurrentAnalysisTime, value);
+        }
+
         public bool IsViewModelInitialized { get; private set; }
 
         private DominantColoursAnalyzer[] Analyzers { get; set; }
