@@ -85,6 +85,7 @@
     </Compile>
     <Compile Include="Controls\ViewModels\ImageResultInfoControlViewModel.cs" />
     <Compile Include="CustomClasses\AnalyzedPictureInfo.cs" />
+    <Compile Include="CustomClasses\DAL\DataAccessLayer.cs" />
     <Compile Include="CustomClasses\PictureDominantColorInfoItem.cs" />
     <Compile Include="Utility.cs" />
     <Page Include="App.xaml">
@@ -109,14 +110,28 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="PictureLoading\PictureLoadingWindow.xaml">
+    <Page Include="Windows\DatabaseInteraction\DatabaseInteractionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Options\OptionsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\PictureLoading\PictureLoadingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindowViewModel.cs" />
-    <Compile Include="PictureLoading\PictureLoadingWindow.xaml.cs">
+    <Compile Include="Windows\DatabaseInteraction\DatabaseInteractionWindow.xaml.cs">
+      <DependentUpon>DatabaseInteractionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Options\OptionsWindow.xaml.cs">
+      <DependentUpon>OptionsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\PictureLoading\PictureLoadingWindow.xaml.cs">
       <DependentUpon>PictureLoadingWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
