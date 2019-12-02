@@ -26,6 +26,7 @@ namespace DominantColoursSearch.Windows.PictureLoading
             InitializeComponent();
         }
 
+        public string[] FilePaths { get; private set; }
         public string[] FileNames { get; private set; }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -49,7 +50,8 @@ namespace DominantColoursSearch.Windows.PictureLoading
                 Debug.WriteLine("File name: " + str);
             }
 
-            this.FileNames = openFileDialog.FileNames;
+            this.FilePaths = openFileDialog.FileNames;
+            this.FileNames = openFileDialog.SafeFileNames;
         }
     }
 }

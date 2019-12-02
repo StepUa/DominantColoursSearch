@@ -21,9 +21,10 @@ namespace DominantColoursSearch.DominantColoursAnalysis
     {
         private Logger Logger { get; } = LogManager.GetCurrentClassLogger();
 
-        public DominantColoursAnalyzer(string filePath, int uniqueIndex)
+        public DominantColoursAnalyzer(string filePath, string fileName, int uniqueIndex)
         {
             this.FilePath = filePath;
+            this.FileName = fileName;
             this.UniqueIndex = uniqueIndex;
             this.AnalysisStopwatch = new Stopwatch();
 
@@ -52,6 +53,7 @@ namespace DominantColoursSearch.DominantColoursAnalysis
         public double SizeCrop { get; set; }
         public bool IsColourFilteringEnabled { get; set; }
         public string FilePath { get; private set; }
+        public string FileName { get; private set; }
 
         #endregion
 
