@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DominantColoursSearch"
         xmlns:controls="clr-namespace:DominantColoursSearch.Controls"
+        xmlns:viewModel="clr-namespace:DominantColoursSearch.DominantColoursAnalysis"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         d:DataContext="{d:DesignInstance local:MainWindowViewModel}">
@@ -16,14 +17,47 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Width="80" Height="40" Content="Run" Click="Button_RunClick"/>
             <Button Width="80" Height="40" Content="Load image" Click="Button_LoadImageClick" />
         </StackPanel>
-        
+
+        <ListBox x:Name="listBoxLoadedImages" Grid.Column="0" Grid.Row="2" SelectionMode="Single" 
+                 ItemsSource="{Binding Analyzers}" SelectedIndex="{Binding SelectedAnalyzerUniqeIndex, Mode=OneWayToSource}"
+                 HorizontalContentAlignment="Stretch" SelectionChanged="listBoxLoadedImages_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type viewModel:DominantColoursAnalyzer}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <TextBox Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding FileName, Mode=OneWay}"
+                                 TextAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="True" IsReadOnlyCaretVisible="False" 
+                                 TextWrapping="NoWrap" BorderThickness="0"/>
+
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Content="►" Foreground="Green" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <Button Grid.Column="1" Content="Save" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <Button Grid.Column="2" Content="x" Foreground="Red" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                        </Grid>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
         <controls:ImageResultInfoControl x:Name="imageResultInfoControlContainer" Grid.Row="0" Grid.Column="1" 
-                                         Grid.RowSpan="2"/>
+                                         Grid.RowSpan="3"/>
     </Grid>
 </Window>
