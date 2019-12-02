@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using DominantColoursSearch.Controls.ViewModels;
 using DominantColoursSearch.Windows.PictureLoading;
 using DominantColoursSearch.DominantColoursAnalysis;
+using System.Diagnostics;
 
 namespace DominantColoursSearch
 {
@@ -38,7 +39,7 @@ namespace DominantColoursSearch
             get => this.imageResultInfoControlContainer?.DataContext as ImageResultInfoControlViewModel;
         }
 
-        public int SelectedImageIndex { get; set; }
+        //public int SelectedImageIndex { get; set; }
 
         private PictureLoadingWindow PictureLoadingWindow { get; set; }
         private MainWindowViewModel ViewModel { get; set; }
@@ -49,7 +50,7 @@ namespace DominantColoursSearch
 
             this.PictureLoadingWindow.ShowDialog();
 
-            this.ViewModel.InitializeViewModel(this.PictureLoadingWindow.FileNames, SetImageOnAnalysisCompleteEvent);
+            this.ViewModel.InitializeViewModel(this.PictureLoadingWindow.FilePaths, this.PictureLoadingWindow.FileNames, SetImageOnAnalysisCompleteEvent);
         }
 
         private void SetImageOnAnalysisCompleteEvent(object sender, EventArgs e)
@@ -62,7 +63,7 @@ namespace DominantColoursSearch
             // TODO: move this to window closing event or smth
             analyzer.AnalysisCompleteEvent -= SetImageOnAnalysisCompleteEvent;
 
-            if (this.SelectedImageIndex != analyzer.UniqueIndex)
+            if (this.ViewModel.SelectedAnalyzerUniqeIndex != analyzer.UniqueIndex)
             {
                 return;
             }
@@ -74,12 +75,22 @@ namespace DominantColoursSearch
         {
             try
             {
-                await this.ViewModel.StartImageProcessingAsync().ConfigureAwait(false); ;
+                await this.ViewModel.StartImageProcessingAsync().ConfigureAwait(false);
             }
             catch (Exception)
             {
                 throw;
             }
+        }
+
+        private void listBoxLoadedImages_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!(sender is ListBox loadedImages))
+            {
+                return;
+            }
+
+            //Debug.WriteLine(this.ViewModel.SelectedAnalyzerUniqeIndex);
         }
     }
 }
