@@ -68,7 +68,14 @@ namespace DominantColoursSearch
                 return;
             }
 
-            this.Dispatcher.Invoke(() => this.ImageResultInfoControlViewModel.ImageResultInfo = analyzer.AnalyzedPictureInfo);
+            this.Dispatcher.Invoke(() =>
+            {
+                this.ImageResultInfoControlViewModel.ImageResultInfo = analyzer.AnalyzedPictureInfo;
+                this.ViewModel.SelectedAnalyzerIterationCountText = analyzer.IterationsCount.ToString();
+
+                var analyzisTime = analyzer.AnalysisTime;
+                this.ViewModel.SelectedAnalyzerTimeText = String.Format($"{analyzisTime.Minutes}:{analyzisTime.Seconds}:{analyzisTime.Milliseconds / 10}");
+            });
         }
 
         private async void Button_RunClick(object sender, RoutedEventArgs e)
@@ -91,6 +98,20 @@ namespace DominantColoursSearch
             }
 
             //Debug.WriteLine(this.ViewModel.SelectedAnalyzerUniqeIndex);
+
+            if (this.ViewModel.SelectedAnalyzerUniqeIndex < 0)
+            {
+                return;
+            }
+
+            var analyzer = this.ViewModel.Analyzers[this.ViewModel.SelectedAnalyzerUniqeIndex];
+
+            this.ViewModel.SelectedAnalyzerIterationCountText = analyzer.IterationsCount.ToString();
+
+            var analyzisTime = analyzer.AnalysisTime;
+            this.ViewModel.SelectedAnalyzerTimeText = String.Format($"{analyzisTime.Minutes}:{analyzisTime.Seconds}:{analyzisTime.Milliseconds / 10}");
+
+            this.ImageResultInfoControlViewModel.ImageResultInfo = analyzer.AnalyzedPictureInfo;
         }
     }
 }
