@@ -23,8 +23,14 @@ namespace DominantColoursSearch.Windows.PictureLoading
     {
         public PictureLoadingWindow()
         {
+            this.ViewModel = new PictureLoadingWindowViewModel();
+
+            this.DataContext = this.ViewModel;
+
             InitializeComponent();
         }
+
+        public PictureLoadingWindowViewModel ViewModel { get; set; }
 
         public string[] FilePaths { get; private set; }
         public string[] FileNames { get; private set; }
@@ -52,6 +58,8 @@ namespace DominantColoursSearch.Windows.PictureLoading
 
             this.FilePaths = openFileDialog.FileNames;
             this.FileNames = openFileDialog.SafeFileNames;
+
+            this.ViewModel.LoadImage(this.FilePaths[this.ViewModel.SelectedImageIndex]);
         }
     }
 }
