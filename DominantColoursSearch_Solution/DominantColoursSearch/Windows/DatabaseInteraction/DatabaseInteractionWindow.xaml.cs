@@ -21,7 +21,13 @@ namespace DominantColoursSearch.Windows.DatabaseInteraction
     {
         public DatabaseInteractionWindow()
         {
+            this.ViewModel = new DatabaseInteractionWindowViewModel();
+
+            this.DataContext = this.ViewModel;
+
             InitializeComponent();
         }
+
+        public DatabaseInteractionWindowViewModel ViewModel { get; set; }
     }
 }

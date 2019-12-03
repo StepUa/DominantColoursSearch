@@ -21,7 +21,13 @@ namespace DominantColoursSearch.Windows.Options
     {
         public OptionsWindow()
         {
+            this.ViewModel = new OptionsWindowViewModel();
+
+            this.DataContext = this.ViewModel;
+
             InitializeComponent();
         }
+
+        public OptionsWindowViewModel ViewModel { get; set; }
     }
 }
