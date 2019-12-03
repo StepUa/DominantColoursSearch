@@ -88,6 +88,7 @@
     <Compile Include="CustomClasses\DAL\DataAccessLayer.cs" />
     <Compile Include="CustomClasses\PictureDominantColorInfoItem.cs" />
     <Compile Include="Utility.cs" />
+    <Compile Include="Windows\PictureLoading\PictureLoadingWindowViewModel.cs" />
     <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -156,6 +157,11 @@
     <Resource Include="Images\play-button-48.png" />
     <Resource Include="Images\stop-button-48.png" />
     <Resource Include="Images\save-button-40.png" />
+    <Resource Include="Images\left-arrow-64.png" />
+    <Resource Include="Images\right-arrow-64.png" />
+    <Resource Include="Images\trash-bin-48.png" />
+    <Resource Include="Images\checked-40.png" />
+    <Resource Include="Images\checked-squere-40.png" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
