@@ -10,24 +10,40 @@
         Title="MainWindow" Height="450" Width="800"
         d:DataContext="{d:DesignInstance local:MainWindowViewModel}">
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                <GradientStop Color="#FFC5D2DE" Offset="0.072"/>
+                <GradientStop Color="#FF7CA4CD" Offset="1"/>
+                <GradientStop Color="#FFB6D3F0" Offset="0.928"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Width="80" Height="40" Content="Run" Click="Button_RunClick"/>
-            <Button Width="80" Height="40" Content="Load image" Click="Button_LoadImageClick" />
+        <Menu Grid.Row="0" Grid.ColumnSpan="3" IsMainMenu="True" >
+            <MenuItem Header="Database" />
+            <MenuItem Header="Export to XML" />
+            <MenuItem Header="Options" />
+        </Menu>
+
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Grid.ColumnSpan="2" Margin="5">
+            <Button Width="75" Height="40" Content="Run all" Click="Button_RunClick" Margin="5"/>
+            <Button Width="75" Height="40" Content="Load image" Click="Button_LoadImageClick" Margin="5"/>
         </StackPanel>
 
-        <ListBox x:Name="listBoxLoadedImages" Grid.Column="0" Grid.Row="2" SelectionMode="Single" 
-                 ItemsSource="{Binding Analyzers}" SelectedIndex="{Binding SelectedAnalyzerUniqeIndex, Mode=OneWayToSource}"
-                 HorizontalContentAlignment="Stretch" SelectionChanged="listBoxLoadedImages_SelectionChanged">
+        <ListBox x:Name="listBoxLoadedImages" Grid.Column="0" Grid.Row="3" SelectionMode="Single" 
+                 ItemsSource="{Binding Analyzers}" SelectedIndex="{Binding SelectedAnalyzerUniqeIndex, Mode=TwoWay}"
+                 HorizontalContentAlignment="Stretch" SelectionChanged="listBoxLoadedImages_SelectionChanged" Grid.ColumnSpan="2">
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type viewModel:DominantColoursAnalyzer}">
                     <Grid>
@@ -38,7 +54,7 @@
 
                         <TextBox Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding FileName, Mode=OneWay}"
                                  TextAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="True" IsReadOnlyCaretVisible="False" 
-                                 TextWrapping="NoWrap" BorderThickness="0"/>
+                                 TextWrapping="NoWrap" BorderThickness="0" Margin="0 0 0 5"/>
 
                         <Grid Grid.Row="1">
                             <Grid.ColumnDefinitions>
@@ -47,9 +63,28 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Button Content="►" Foreground="Green" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <Button Grid.Column="1" Content="Save" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <Button Grid.Column="2" Content="x" Foreground="Red" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <Button Background="Transparent" Width="30" Height="30" 
+                                    BorderThickness="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                
+                                <!--<Button.Background>
+                                    <ImageBrush ImageSource="/Images/play-button-48.png" />
+                                </Button.Background>-->
+
+                                <Image Source="/Images/play-button-48.png" />
+
+                            </Button>
+                            <Button Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                    Background="Transparent" BorderThickness="0" Width="27" Height="27">
+
+                                <Image Source="/Images/save-button-40.png" />
+
+                            </Button>
+                            <Button Grid.Column="2" Width="30" Height="30" Background="Transparent" BorderThickness="0" 
+                                    VerticalAlignment="Center" HorizontalAlignment="Center">
+
+                                <Image Source="/Images/stop-button-48.png" />
+
+                            </Button>
 
                         </Grid>
                     </Grid>
@@ -57,7 +92,57 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <controls:ImageResultInfoControl x:Name="imageResultInfoControlContainer" Grid.Row="0" Grid.Column="1" 
+        <controls:ImageResultInfoControl x:Name="imageResultInfoControlContainer" Grid.Row="1" Grid.Column="2" 
                                          Grid.RowSpan="3"/>
+
+        <StatusBar Grid.Row="4" Grid.ColumnSpan="3">
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100" />
+                            <!--Separator-->
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <!--Separator-->
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="35" />
+                            <!--Separator-->
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="75" />
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+
+            <StatusBarItem>
+                <TextBlock Text="Current status" />
+            </StatusBarItem>
+
+            <Separator Grid.Column="1"/>
+
+            <Separator Grid.Column="3"/>
+
+            <StatusBarItem Grid.Column="4">
+                <TextBlock Text="Number of iterations: " />
+            </StatusBarItem>
+
+            <StatusBarItem Grid.Column="5">
+                <TextBlock Text="{Binding SelectedAnalyzerIterationCountText}" />
+            </StatusBarItem>
+
+            <Separator Grid.Column="6"/>
+
+            <StatusBarItem Grid.Column="7">
+                <TextBlock Text="Processing time: " />
+            </StatusBarItem>
+
+            <StatusBarItem Grid.Column="8">
+                <TextBlock Text="{Binding SelectedAnalyzerTimeText}" />
+            </StatusBarItem>
+
+        </StatusBar>
     </Grid>
 </Window>
