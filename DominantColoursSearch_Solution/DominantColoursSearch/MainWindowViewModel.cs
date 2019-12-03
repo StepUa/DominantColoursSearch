@@ -57,25 +57,25 @@ namespace DominantColoursSearch
             set => SetProperty(ref this._statusText, value);
         }
 
-        private string _stausCurrentIterationsNumber;
-        public string StausCurrentIterationsNumber
-        {
-            get => this._stausCurrentIterationsNumber;
-            set => SetProperty(ref this._stausCurrentIterationsNumber, value);
-        }
-
-        private string _statusCurrentAnalysisTime;
-        public string StatusCurrentAnalysisTime
-        {
-            get => this._statusCurrentAnalysisTime;
-            set => SetProperty(ref this._statusCurrentAnalysisTime, value);
-        }
-
         private int _selectedAnalyzerUniqeIndex;
         public int SelectedAnalyzerUniqeIndex
         {
             get => this._selectedAnalyzerUniqeIndex;
             set => SetProperty(ref this._selectedAnalyzerUniqeIndex, value);
+        }
+
+        private string _selectedAnalyzerIterationCountText = "0";
+        public string SelectedAnalyzerIterationCountText
+        {
+            get { return _selectedAnalyzerIterationCountText; }
+            set { SetProperty(ref _selectedAnalyzerIterationCountText, value); }
+        }
+
+        private string _selectedAnalyzerTimeText = "00:00:00";
+        public string SelectedAnalyzerTimeText
+        {
+            get { return _selectedAnalyzerTimeText; }
+            set { SetProperty(ref _selectedAnalyzerTimeText, value); }
         }
 
         public bool IsViewModelInitialized { get; private set; }
