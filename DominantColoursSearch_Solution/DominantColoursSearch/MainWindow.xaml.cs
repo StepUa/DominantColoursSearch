@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using DominantColoursSearch.Controls.ViewModels;
 using DominantColoursSearch.Windows.PictureLoading;
 using DominantColoursSearch.DominantColoursAnalysis;
+using DominantColoursSearch.Windows;
 using System.Diagnostics;
 
 namespace DominantColoursSearch
@@ -112,6 +113,25 @@ namespace DominantColoursSearch
             this.ViewModel.SelectedAnalyzerTimeText = String.Format($"{analyzisTime.Minutes}:{analyzisTime.Seconds}:{analyzisTime.Milliseconds / 10}");
 
             this.ImageResultInfoControlViewModel.ImageResultInfo = analyzer.AnalyzedPictureInfo;
+        }
+
+        private void DatabaseMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Windows.DatabaseInteraction.DatabaseInteractionWindow databaseInteractionWindow = new Windows.DatabaseInteraction.DatabaseInteractionWindow();
+
+            databaseInteractionWindow.ShowDialog();
+        }
+
+        private void XmlExportMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void OptionsMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Windows.Options.OptionsWindow optionsWindow = new Windows.Options.OptionsWindow();
+
+            optionsWindow.ShowDialog();
         }
     }
 }

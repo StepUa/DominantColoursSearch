@@ -31,9 +31,9 @@
         </Grid.RowDefinitions>
 
         <Menu Grid.Row="0" Grid.ColumnSpan="3" IsMainMenu="True" >
-            <MenuItem Header="Database" />
-            <MenuItem Header="Export to XML" />
-            <MenuItem Header="Options" />
+            <MenuItem Header="Database" Click="DatabaseMenuItem_Click"/>
+            <MenuItem Header="Export to XML" Click="XmlExportMenuItem_Click"/>
+            <MenuItem Header="Options" Click="OptionsMenuItem_Click"/>
         </Menu>
 
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Grid.ColumnSpan="2" Margin="5">
