@@ -237,7 +237,7 @@ namespace DominantColoursSearch.DominantColoursAnalysis
             this.Logger.Info(String.Format("Analysis took {0}:{1}:{2} and {3} iterations. Total seconds: {4} Image size {5}x{6}",
                 this.AnalysisTime.Minutes,
                 this.AnalysisTime.Seconds,
-                this.AnalysisTime.Milliseconds,
+                this.AnalysisTime.Milliseconds / 10,
                 this.IterationsCount,
                 this.AnalysisTime.TotalSeconds,
                 this.SourceImage.Width,
