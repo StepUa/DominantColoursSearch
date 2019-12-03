@@ -128,9 +128,11 @@
     <Compile Include="Windows\DatabaseInteraction\DatabaseInteractionWindow.xaml.cs">
       <DependentUpon>DatabaseInteractionWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\DatabaseInteraction\DatabaseInteractionWindowViewModel.cs" />
     <Compile Include="Windows\Options\OptionsWindow.xaml.cs">
       <DependentUpon>OptionsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Options\OptionsWindowViewModel.cs" />
     <Compile Include="Windows\PictureLoading\PictureLoadingWindow.xaml.cs">
       <DependentUpon>PictureLoadingWindow.xaml</DependentUpon>
     </Compile>
