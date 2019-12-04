@@ -8,6 +8,7 @@
         xmlns:viewModel="clr-namespace:DominantColoursSearch.DominantColoursAnalysis"
         mc:Ignorable="d"
         Title="EZColourDominanceAnalyzer" Height="450" Width="800"
+        Icon="/Images/colors-48.png"
         d:DataContext="{d:DesignInstance local:MainWindowViewModel}">
     <Grid>
         <Grid.Background>
