@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DominantColoursSearch.Windows.DatabaseInteraction"
         mc:Ignorable="d"
-        Title="DatabaseInteractionWindow" Height="465" Width="700" ResizeMode="CanMinimize"
+        Title="Database" Height="465" Width="700" ResizeMode="CanMinimize"
         d:DataContext="{d:DesignInstance local:DatabaseInteractionWindowViewModel}">
     <Grid>
         <Grid.Background>

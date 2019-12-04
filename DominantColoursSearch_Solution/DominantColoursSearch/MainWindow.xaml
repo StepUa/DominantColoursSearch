@@ -7,7 +7,7 @@
         xmlns:controls="clr-namespace:DominantColoursSearch.Controls"
         xmlns:viewModel="clr-namespace:DominantColoursSearch.DominantColoursAnalysis"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="EZColourDominanceAnalyzer" Height="450" Width="800"
         d:DataContext="{d:DesignInstance local:MainWindowViewModel}">
     <Grid>
         <Grid.Background>

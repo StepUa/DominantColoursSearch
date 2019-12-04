@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DominantColoursSearch.Windows.Options"
         mc:Ignorable="d"
-        Title="OptionsWindow" Height="200" Width="375" ResizeMode="NoResize"
+        Title="Options" Height="200" Width="375" ResizeMode="NoResize"
         d:DataContext="{d:DesignInstance local:OptionsWindowViewModel}">
     <Grid>
         <Grid.Background>
