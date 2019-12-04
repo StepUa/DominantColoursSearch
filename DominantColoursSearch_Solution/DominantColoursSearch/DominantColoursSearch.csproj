@@ -162,6 +162,7 @@
     <Resource Include="Images\trash-bin-48.png" />
     <Resource Include="Images\checked-40.png" />
     <Resource Include="Images\checked-squere-40.png" />
+    <Resource Include="Images\add-image-48.png" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
