@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DominantColoursSearch.Windows.PictureLoading"
         mc:Ignorable="d"
-        Title="PictureLoadingWindow" Height="465" Width="700"
+        Title="PictureLoadingWindow" Height="465" Width="700" ResizeMode="CanMinimize"
         d:DataContext="{d:DesignInstance local:PictureLoadingWindowViewModel}">
     <Grid>
         <Grid.Background>
@@ -50,7 +50,7 @@
                   MinWidth="300">
             <StackPanel Orientation="Vertical">
                 <!--Tmp-->
-                <TextBlock Text="Path: C:\Users\kovba\Desktop\test1.png" Margin="3 3" FontSize="13"/>
+                <TextBlock Text="Path: C:\Users\kovba\Desktop\Example1.png" Margin="3 3" FontSize="13"/>
                 <Separator />
                 <TextBlock Text="Name: Example1.png" Margin="3 3" FontSize="13"/>
                 <Separator />
@@ -59,7 +59,7 @@
                 <TextBlock Text="Format: PNG" Margin="3 3" FontSize="13"/>
                 <Separator />
                 <Button Grid.Column="2" Width="30" Height="30" Background="Transparent" BorderThickness="0" 
-                                    VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 5 0 0">
+                                    VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 5 0 0">
 
                     <Image Source="/Images/trash-bin-48.png" />
 
