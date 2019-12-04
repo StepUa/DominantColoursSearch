@@ -39,6 +39,9 @@
   <PropertyGroup>
     <StartupObject>DominantColoursSearch.App</StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>colors-96.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Emgu.CV.UI, Version=4.1.1.3497, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
       <HintPath>..\packages\EMGU.CV.4.1.1.3497\lib\net35\Emgu.CV.UI.dll</HintPath>
@@ -165,6 +168,7 @@
     <Resource Include="Images\add-image-48.png" />
     <Resource Include="Images\colors-48.png" />
     <Resource Include="Images\colors-96.png" />
+    <Resource Include="colors-96.ico" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
