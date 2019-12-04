@@ -5,9 +5,59 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DominantColoursSearch.Windows.Options"
         mc:Ignorable="d"
-        Title="OptionsWindow" Height="450" Width="800"
+        Title="OptionsWindow" Height="200" Width="375" ResizeMode="NoResize"
         d:DataContext="{d:DesignInstance local:OptionsWindowViewModel}">
     <Grid>
-        
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                <GradientStop Color="#FFC5D2DE" Offset="0.072"/>
+                <GradientStop Color="#FF7CA4CD" Offset="1"/>
+                <GradientStop Color="#FFB6D3F0" Offset="0.928"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Number of clusters (dominant colours):" Grid.Row="1" Grid.Column="1" FontSize="13"
+                   Margin="10 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <ComboBox Grid.Row="1" Grid.Column="2" Margin="15 0 0 0" ItemsSource="{Binding NumberOfClusters, Mode=TwoWay}"
+                  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <Separator Grid.Row="2" Grid.Column="1"  Grid.ColumnSpan="2" />
+
+        <TextBlock Text="Image resizing scale (%):" Grid.Row="3" Grid.Column="1" FontSize="13"
+                   Margin="10 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <ComboBox Grid.Row="3" Grid.Column="2" Margin="15 0 0 0" ItemsSource="{Binding ImageResizintScale, Mode=TwoWay}"
+                  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <Separator Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" />
+
+        <TextBlock Text="Sensitivity mode to bright colors:" Grid.Row="5" Grid.Column="1" FontSize="13"
+                   Margin="10 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <CheckBox Grid.Row="5" Grid.Column="2" IsChecked="{Binding IsSensitivityModeToBrightColorsEnabled, Mode=TwoWay}"
+                  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+        <Separator Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" />
+
+        <TextBlock Text="User interface language:" Grid.Row="7" Grid.Column="1" FontSize="13"
+                   Margin="10 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <ComboBox Grid.Row="7" Grid.Column="2" Margin="15 0 0 0" ItemsSource="{Binding LanguageList, Mode=TwoWay}"
+                  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
     </Grid>
 </Window>
