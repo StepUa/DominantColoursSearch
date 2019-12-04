@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:DominantColoursSearch.Windows.DatabaseInteraction"
         mc:Ignorable="d"
         Title="Database" Height="465" Width="700" ResizeMode="CanMinimize"
-        d:DataContext="{d:DesignInstance local:DatabaseInteractionWindowViewModel}">
+        d:DataContext="{d:DesignInstance local:DatabaseInteractionWindowViewModel}"
+        Icon="/Images/colors-48.png"
+        >
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">

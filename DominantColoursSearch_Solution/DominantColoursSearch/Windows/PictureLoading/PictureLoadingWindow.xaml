@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:DominantColoursSearch.Windows.PictureLoading"
         mc:Ignorable="d"
         Title="Load images" Height="465" Width="700" ResizeMode="CanMinimize"
-        d:DataContext="{d:DesignInstance local:PictureLoadingWindowViewModel}">
+        d:DataContext="{d:DesignInstance local:PictureLoadingWindowViewModel}"
+        Icon="/Images/colors-48.png"
+        >
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
