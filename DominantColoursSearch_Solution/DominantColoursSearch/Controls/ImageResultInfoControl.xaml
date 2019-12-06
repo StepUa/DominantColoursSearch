@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:DominantColoursSearch.Controls"
              xmlns:customClasses="clr-namespace:DominantColoursSearch.CustomClasses"
              xmlns:viewModel="clr-namespace:DominantColoursSearch.Controls.ViewModels"
+             xmlns:converter="clr-namespace:DominantColoursSearch.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     
@@ -13,6 +14,10 @@
         <viewModel:ImageResultInfoControlViewModel />
     </UserControl.DataContext>
 
+    <UserControl.Resources>
+        <converter:BackgroungToForegroundCalculation x:Key="backgroundToForegroundConverter"/>
+    </UserControl.Resources>
+    
     <Border BorderThickness="1" BorderBrush="#FF000000" > <!--CornerRadius="8"-->
         <Grid>
             <Grid.RowDefinitions>
@@ -20,7 +25,7 @@
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
-            <Image x:Name="imageImageContainer" Source="{Binding ImageResultInfo.AnalyzedImageWithClusters}"/>
+            <Image x:Name="imageImageContainer" Source="{Binding ImageResultInfo.AnalyzedImageWithClusters}" Margin="0 6"/>
 
             <ItemsControl x:Name="itemsControlPictureColorInfoContainer" Grid.Row="1" ItemsSource="{Binding ImageResultInfo.DominantColours}">
                 <ItemsControl.ItemsPanel>
@@ -33,7 +38,7 @@
                     <DataTemplate DataType="{x:Type customClasses:PictureDominantColorInfoItem}">
                         <TextBox Width="100" Height="40" Text="{Binding ColorTextRepresentation, Mode=OneWay}" Background="{Binding ColorBrush, Mode=OneWay}"
                                  TextAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="True" IsReadOnlyCaretVisible="False" 
-                                 TextWrapping="Wrap" BorderThickness="0"/>
+                                 TextWrapping="Wrap" BorderThickness="0" Foreground="{Binding ColorBrush, Converter={StaticResource backgroundToForegroundConverter}}"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

@@ -37,7 +37,7 @@ namespace DominantColoursSearch.CustomClasses
             }
         }
 
-        public Brush ColorBrush
+        public SolidColorBrush ColorBrush
         {
             get => new SolidColorBrush(this.DominantColor);
         }

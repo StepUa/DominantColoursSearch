@@ -87,6 +87,7 @@
       <DependentUpon>ImageResultInfoControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ViewModels\ImageResultInfoControlViewModel.cs" />
+    <Compile Include="Converters\BackgroungToForegroundCalculation.cs" />
     <Compile Include="CustomClasses\AnalyzedPictureInfo.cs" />
     <Compile Include="CustomClasses\DAL\DataAccessLayer.cs" />
     <Compile Include="CustomClasses\PictureDominantColorInfoItem.cs" />
