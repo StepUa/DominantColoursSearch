@@ -78,7 +78,7 @@
         </Border>
 
         <!--Width=90 for English localization-->
-        <Button Grid.Row="1" Width="110" Height="40" Margin="10" HorizontalAlignment="Center">
+        <Button Grid.Row="1" Width="110" Height="40" Margin="10" HorizontalAlignment="Center" Click="ApplyButton_Click">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Застосувати" FontSize="13" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <Button Width="30" Height="30" Background="Transparent" BorderThickness="0" 

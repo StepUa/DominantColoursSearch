@@ -29,5 +29,10 @@ namespace DominantColoursSearch.Windows.Options
         }
 
         public OptionsWindowViewModel ViewModel { get; set; }
+
+        private void ApplyButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
