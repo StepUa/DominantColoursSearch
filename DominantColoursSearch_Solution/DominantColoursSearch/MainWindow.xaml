@@ -32,14 +32,18 @@
         </Grid.RowDefinitions>
 
         <Menu Grid.Row="0" Grid.ColumnSpan="3" IsMainMenu="True" >
-            <MenuItem Header="Database" Click="DatabaseMenuItem_Click"/>
-            <MenuItem Header="Export to XML" Click="XmlExportMenuItem_Click"/>
-            <MenuItem Header="Options" Click="OptionsMenuItem_Click"/>
+            <MenuItem Header="База даних" Click="DatabaseMenuItem_Click"/>
+            <MenuItem Header="Експорт в XML файл" Click="XmlExportMenuItem_Click"/>
+            <MenuItem Header="Налаштування" Click="OptionsMenuItem_Click"/>
         </Menu>
 
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Grid.ColumnSpan="2" Margin="5">
-            <Button Width="75" Height="40" Content="Run all" Click="Button_RunClick" Margin="5"/>
-            <Button Width="75" Height="40" Content="Load image" Click="Button_LoadImageClick" Margin="5"/>
+            <Button Width="75" Height="40" Click="Button_RunClick" Margin="5">
+                <TextBlock Text="Запустити все" TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
+            <Button Width="90" Height="40" Click="Button_LoadImageClick" Margin="5">
+                <TextBlock Text="Завантажити зображення..." TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
         </StackPanel>
 
         <ListBox x:Name="listBoxLoadedImages" Grid.Column="0" Grid.Row="3" SelectionMode="Single" 
@@ -105,7 +109,7 @@
                 <ItemsPanelTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="Auto" />
                             <!--Separator-->
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
@@ -123,7 +127,7 @@
             </StatusBar.ItemsPanel>
 
             <StatusBarItem>
-                <TextBlock Text="Current status" />
+                <TextBlock Text="Дані ініціалізовані" />
             </StatusBarItem>
 
             <Separator Grid.Column="1"/>
@@ -131,7 +135,7 @@
             <Separator Grid.Column="3"/>
 
             <StatusBarItem Grid.Column="4">
-                <TextBlock Text="Number of iterations: " />
+                <TextBlock Text="Кількість ітерацій: " />
             </StatusBarItem>
 
             <StatusBarItem Grid.Column="5">
@@ -141,7 +145,7 @@
             <Separator Grid.Column="6"/>
 
             <StatusBarItem Grid.Column="7">
-                <TextBlock Text="Processing time: " />
+                <TextBlock Text="Час обробки: " />
             </StatusBarItem>
 
             <StatusBarItem Grid.Column="8">
