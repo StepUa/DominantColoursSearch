@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DominantColoursSearch.Windows.PictureLoading"
         mc:Ignorable="d"
-        Title="Load images" Height="465" Width="700" ResizeMode="CanMinimize"
+        Title="Завантаження зображень" Height="465" Width="730" ResizeMode="CanMinimize"
         d:DataContext="{d:DesignInstance local:PictureLoadingWindowViewModel}"
         Icon="/Images/colors-48.png"
         >
@@ -47,18 +47,18 @@
         </StackPanel>
 
         <!--Picture inforamtion-->
-        <GroupBox Grid.Row="1" Header="Picture information" Margin="10" Padding="10" 
+        <GroupBox Grid.Row="1" Header="Інформація про зображення" Margin="10" Padding="10" 
                   HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="13"
                   MinWidth="300">
             <StackPanel Orientation="Vertical">
                 <!--Tmp-->
-                <TextBlock Text="Path: C:\Users\kovba\Desktop\Example1.png" Margin="3 3" FontSize="13"/>
+                <TextBlock Text="Шлях до файлу: C:\Users\kovba\Desktop\Example1.jpg" Margin="3 3" FontSize="13"/>
                 <Separator />
-                <TextBlock Text="Name: Example1.png" Margin="3 3" FontSize="13"/>
+                <TextBlock Text="Назва файлу: Example1.jpg" Margin="3 3" FontSize="13"/>
                 <Separator />
-                <TextBlock Text="Resolution: 1444x900" Margin="3 3" FontSize="13"/>
+                <TextBlock Text="Роздільна здатність зображення: 736x1308" Margin="3 3" FontSize="13"/>
                 <Separator />
-                <TextBlock Text="Format: PNG" Margin="3 3" FontSize="13"/>
+                <TextBlock Text="Розширення: JPG" Margin="3 3" FontSize="13"/>
                 <Separator />
                 <Button Grid.Column="2" Width="30" Height="30" Background="Transparent" BorderThickness="0" 
                                     VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 5 0 0">
@@ -77,12 +77,14 @@
 
         <!--Control buttons-->
         <StackPanel Grid.Row="3" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center"
-                    VerticalAlignment="Center" Margin="5 5 5 10">
-            <Button Grid.Row="3" Content="Select images..." Width="100" Height="40" 
-                    FontSize="13" Click="Button_Click" Margin="0 0 5 0"/>
-            <Button Grid.Row="3" Width="100" Height="40" Margin="5 0 0 0">
+                    VerticalAlignment="Center" Margin="5 0 10 10">
+            <Button Grid.Row="3" Width="110" Height="40" 
+                    FontSize="12" Click="Button_Click" Margin="0 0 5 0">
+                <TextBlock Text="Вибрати зображення..." TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
+            <Button Grid.Row="3" Width="110" Height="40" Margin="5 0 0 0" Click="ApplyButton_Click">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Apply" FontSize="13" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="Застосувати" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <Button Width="30" Height="30" Background="Transparent" BorderThickness="0" 
                             VerticalAlignment="Center" HorizontalAlignment="Center" >
 

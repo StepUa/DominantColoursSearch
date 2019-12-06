@@ -61,5 +61,10 @@ namespace DominantColoursSearch.Windows.PictureLoading
 
             this.ViewModel.LoadImage(this.FilePaths[this.ViewModel.SelectedImageIndex]);
         }
+
+        private void ApplyButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
