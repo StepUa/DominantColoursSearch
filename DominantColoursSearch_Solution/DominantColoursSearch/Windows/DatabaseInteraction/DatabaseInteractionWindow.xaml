@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DominantColoursSearch.Windows.DatabaseInteraction"
         mc:Ignorable="d"
-        Title="Database" Height="465" Width="700" ResizeMode="CanMinimize"
+        Title="База даних" Height="465" Width="730" ResizeMode="CanMinimize"
         d:DataContext="{d:DesignInstance local:DatabaseInteractionWindowViewModel}"
         Icon="/Images/colors-48.png"
         >
@@ -37,7 +37,7 @@
                 <Image Source="/Images/left-arrow-64.png" />
 
             </Button>
-            <TextBlock Text="2/10" FontSize="20" Margin="10 0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Text="11/11" FontSize="20" Margin="10 0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <Button Grid.Column="2" Width="35" Height="35" Background="Transparent" BorderThickness="0" 
                                     VerticalAlignment="Center" HorizontalAlignment="Center">
 
@@ -47,18 +47,18 @@
         </StackPanel>
 
         <!--Picture inforamtion-->
-        <GroupBox Grid.Row="1" Header="Picture information" Margin="10" Padding="10" 
+        <GroupBox Grid.Row="1" Header="Інформація про зображення" Margin="10" Padding="10" 
                   HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="13"
                   MinWidth="300">
             <StackPanel Orientation="Vertical">
                 <!--Tmp-->
-                <TextBlock Text="Path: C:\Users\kovba\Desktop\Example1.png" Margin="3 3" FontSize="13"/>
+                <TextBlock Text="Шлях до файлу: C:\Users\kovba\Desktop\test1.jpg" Margin="3 3" FontSize="13"/>
                 <Separator />
-                <TextBlock Text="Name: Example1.png" Margin="3 3" FontSize="13"/>
+                <TextBlock Text="Назва файлу: test1.jpg" Margin="3 3" FontSize="13"/>
                 <Separator />
-                <TextBlock Text="Resolution: 1444x900" Margin="3 3" FontSize="13"/>
+                <TextBlock Text="Роздільна здатність зображення: 650x334" Margin="3 3" FontSize="13"/>
                 <Separator />
-                <TextBlock Text="Format: PNG" Margin="3 3" FontSize="13"/>
+                <TextBlock Text="Розширення: JPG" Margin="3 3" FontSize="13"/>
                 <Separator />
                 <Button Grid.Column="2" Width="30" Height="30" Background="Transparent" BorderThickness="0" 
                                     VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 5 0 0">
@@ -77,9 +77,9 @@
 
         <!--Control buttons-->
         <Button Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center"
-                Width="140" Height="40" VerticalAlignment="Center" Margin="5 5 5 10">
+                Width="150" Height="40" VerticalAlignment="Center" Margin="5 5 5 10">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Add to queue" FontSize="13" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Text="Додати в чергу" FontSize="13" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <Button Width="30" Height="30" Background="Transparent" BorderThickness="0" 
                             VerticalAlignment="Center" HorizontalAlignment="Center" >
 

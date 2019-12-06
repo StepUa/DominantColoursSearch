@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DominantColoursSearch.Windows.Options"
         mc:Ignorable="d"
-        Title="Options" Height="295" Width="410" ResizeMode="NoResize"
+        Title="Налаштування" Height="295" Width="460" ResizeMode="NoResize"
         d:DataContext="{d:DesignInstance local:OptionsWindowViewModel}"
         Icon="/Images/colors-48.png"
         >
+    <!--Width=410 for English localization-->
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
@@ -44,37 +45,42 @@
                     <RowDefinition Height="10"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Number of clusters (dominant colours):" Grid.Row="1" Grid.Column="1" FontSize="13"
+                <!--Number of clusters (dominant colours):-->
+                <TextBlock Text="Кількість кластерів (шуканих домінантних кольорів):" Grid.Row="1" Grid.Column="1" FontSize="13"
                            Margin="10 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                 <ComboBox Grid.Row="1" Grid.Column="3" Margin="0 0 7 0" ItemsSource="{Binding NumberOfClusters, Mode=TwoWay}"
                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                 <Separator Grid.Row="2" Grid.Column="1"  Grid.ColumnSpan="3" />
 
-                <TextBlock Text="Image resizing scale (%):" Grid.Row="3" Grid.Column="1" FontSize="13"
+                <!--Image resizing scale (%):-->
+                <TextBlock Text="Масштаб зменшення зображення (%):" Grid.Row="3" Grid.Column="1" FontSize="13"
                            Margin="10 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <ComboBox Grid.Row="3" Grid.Column="3" Margin="0 0 7 0" ItemsSource="{Binding ImageResizintScale, Mode=TwoWay}"
                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                 <Separator Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" />
 
-                <TextBlock Text="Sensitivity mode to bright colors:" Grid.Row="5" Grid.Column="1" FontSize="13"
+                <!--Sensitivity mode to bright colors:-->
+                <TextBlock Text="Режим чутливості до яскравих кольорів:" Grid.Row="5" Grid.Column="1" FontSize="13"
                            Margin="10 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <CheckBox Grid.Row="5" Grid.Column="3" IsChecked="{Binding IsSensitivityModeToBrightColorsEnabled, Mode=TwoWay}"
                           VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 7 0"/>
 
                 <Separator Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" />
 
-                <TextBlock Text="User interface language:" Grid.Row="7" Grid.Column="1" FontSize="13"
+                <!--User interface language:-->
+                <TextBlock Text="Мова інтерфейсу:" Grid.Row="7" Grid.Column="1" FontSize="13"
                            Margin="10 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <ComboBox Grid.Row="7" Grid.Column="3" Margin="0 0 7 0" ItemsSource="{Binding LanguageList, Mode=TwoWay}"
                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Grid>
         </Border>
 
-        <Button Grid.Row="1" Width="90" Height="40" Margin="10" HorizontalAlignment="Center">
+        <!--Width=90 for English localization-->
+        <Button Grid.Row="1" Width="110" Height="40" Margin="10" HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Apply" FontSize="13" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Text="Застосувати" FontSize="13" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <Button Width="30" Height="30" Background="Transparent" BorderThickness="0" 
                             VerticalAlignment="Center" HorizontalAlignment="Center" >
 
