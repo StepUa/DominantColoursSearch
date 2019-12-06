@@ -40,8 +40,6 @@ namespace DominantColoursSearch
             get => this.imageResultInfoControlContainer?.DataContext as ImageResultInfoControlViewModel;
         }
 
-        //public int SelectedImageIndex { get; set; }
-
         private PictureLoadingWindow PictureLoadingWindow { get; set; }
         private MainWindowViewModel ViewModel { get; set; }
 
