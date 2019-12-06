@@ -230,7 +230,7 @@ namespace DominantColoursSearch.DominantColoursAnalysis
 
             // TODO: change this code so object creation 
             // (for binding to a view) will take place in SetImageOnAnalysisCompleteEvent() (MainWindow.xaml) and not here
-            Application.Current.Dispatcher.Invoke((SetAnalysisResult));
+            Application.Current.Dispatcher.Invoke(SetAnalysisResult);
             //SetAnalysisResult();
 
             // Logging
