@@ -11,6 +11,14 @@ namespace DominantColoursSearch.CustomClasses
 {
     public class PictureDominantColorInfoItem : INotifyPropertyChanged
     {
+        /// <summary>
+        /// This constructor is only used for serialization. Do not use it anywhere else
+        /// </summary>
+        public PictureDominantColorInfoItem()
+        {
+
+        }
+
         public PictureDominantColorInfoItem(Color color)
         {
             this.DominantColor = color;

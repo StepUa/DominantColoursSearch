@@ -14,12 +14,22 @@ using System.Windows;
 using System.Diagnostics;
 using NLog;
 using Emgu.CV.CvEnum;
+using System.Xml.Serialization;
 
 namespace DominantColoursSearch.DominantColoursAnalysis
 {
+    [Serializable]
     public class DominantColoursAnalyzer : BindableBase
     {
         private Logger Logger { get; } = LogManager.GetCurrentClassLogger();
+
+        /// <summary>
+        /// This constructor is only used for serialization. Do not use it anywhere else
+        /// </summary>
+        public DominantColoursAnalyzer()
+        {
+
+        }
 
         public DominantColoursAnalyzer(string filePath, string fileName, int uniqueIndex)
         {
@@ -42,6 +52,7 @@ namespace DominantColoursSearch.DominantColoursAnalysis
                 new ColorCluster(){NewColor = new MCvScalar(153, 255, 153)},
                 new ColorCluster(){NewColor = new MCvScalar(0, 75, 150)}
             };
+            this.ClustersCount = this.clusters.Length; // TODO: tmp, change this
         }
 
         public event EventHandler AnalysisCompleteEvent;
@@ -52,14 +63,14 @@ namespace DominantColoursSearch.DominantColoursAnalysis
         public int ClustersCount { get; set; }
         public double SizeCrop { get; set; }
         public bool IsColourFilteringEnabled { get; set; }
-        public string FilePath { get; private set; }
-        public string FileName { get; private set; }
+        public string FilePath { get; set; } // TODO: implement IXmlSerializable and change set back to private
+        public string FileName { get; set; } // TODO: implement IXmlSerializable and change set back to private
 
         #endregion
 
         private Stopwatch AnalysisStopwatch { get; set; }
 
-        public int IterationsCount { get; private set; }
+        public int IterationsCount { get; set; } // TODO: implement IXmlSerializable and change set back to private
 
         public TimeSpan AnalysisTime
         {
@@ -69,10 +80,10 @@ namespace DominantColoursSearch.DominantColoursAnalysis
         }
 
         private AnalyzedPictureInfo _analyzedPictureInfo;
-        public AnalyzedPictureInfo AnalyzedPictureInfo
+        public AnalyzedPictureInfo AnalyzedPictureInfo // TODO: implement IXmlSerializable and change set back to private
         {
             get => this._analyzedPictureInfo;
-            private set
+            set
             {
                 if (Object.ReferenceEquals(this._analyzedPictureInfo, value))
                 {
@@ -86,10 +97,10 @@ namespace DominantColoursSearch.DominantColoursAnalysis
         }
 
         private bool _isFinished;
-        public bool IsFinished
+        public bool IsFinished // TODO: implement IXmlSerializable and change set back to private
         {
             get => this._isFinished;
-            private set
+            set
             {
                 if (this._isFinished.Equals(value))
                 {
@@ -107,8 +118,10 @@ namespace DominantColoursSearch.DominantColoursAnalysis
             }
         }
 
+        [XmlIgnore]
         public Image<Bgr, Byte> SourceImage { get; set; }
 
+        [XmlIgnore]
         public Image<Bgr, Byte> AnalizedImage { get; set; }
 
         public ColorCluster[] clusters;

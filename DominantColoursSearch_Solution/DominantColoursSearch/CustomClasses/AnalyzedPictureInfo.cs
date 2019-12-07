@@ -5,13 +5,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
+using System.Xml.Serialization;
 using Prism.Mvvm;
 
 namespace DominantColoursSearch.CustomClasses
 {
     public class AnalyzedPictureInfo : BindableBase
     {
+        public AnalyzedPictureInfo()
+        {
+
+        }
+
         private BitmapSource _analyzedImage;
+        [XmlIgnore]
         public BitmapSource AnalyzedImage
         {
             get => this._analyzedImage;
@@ -29,6 +36,7 @@ namespace DominantColoursSearch.CustomClasses
         }
 
         private BitmapSource _analyzedImageWithClusters;
+        [XmlIgnore]
         public BitmapSource AnalyzedImageWithClusters
         {
             get => this._analyzedImageWithClusters;
