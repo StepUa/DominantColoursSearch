@@ -51,6 +51,7 @@ namespace DominantColoursSearch.DominantColoursAnalysis
                 new ColorCluster(){NewColor = new MCvScalar(203, 192, 255)},
                 new ColorCluster(){NewColor = new MCvScalar(153, 255, 153)},
                 new ColorCluster(){NewColor = new MCvScalar(0, 75, 150)}
+                //new ColorCluster(){NewColor = new MCvScalar(255, 255, 255)}
             };
             this.ClustersCount = this.clusters.Length; // TODO: tmp, change this
         }
