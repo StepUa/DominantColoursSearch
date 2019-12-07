@@ -18,7 +18,7 @@
         <converter:BackgroungToForegroundCalculation x:Key="backgroundToForegroundConverter"/>
     </UserControl.Resources>
     
-    <Border BorderThickness="1" BorderBrush="#FF000000" > <!--CornerRadius="8"-->
+    <Border BorderThickness="1" BorderBrush="#FF000000" Background="LightGray"> <!--CornerRadius="8"-->
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
