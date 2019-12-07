@@ -25,7 +25,7 @@
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
-            <Image x:Name="imageImageContainer" Source="{Binding ImageResultInfo.AnalyzedImageWithClusters}" Margin="0 6"/>
+            <Image x:Name="imageImageContainer" Source="{Binding ImageResultInfo.AnalyzedImageWithClusters}" Margin="7 2"/>
 
             <ItemsControl x:Name="itemsControlPictureColorInfoContainer" Grid.Row="1" ItemsSource="{Binding ImageResultInfo.DominantColours}">
                 <ItemsControl.ItemsPanel>
