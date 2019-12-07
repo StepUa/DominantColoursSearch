@@ -30,10 +30,7 @@ namespace DominantColoursSearch.Windows.PictureLoading
             InitializeComponent();
         }
 
-        public PictureLoadingWindowViewModel ViewModel { get; set; }
-
-        public string[] FilePaths { get; private set; }
-        public string[] FileNames { get; private set; }
+        public PictureLoadingWindowViewModel ViewModel { get; private set; }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -56,15 +53,34 @@ namespace DominantColoursSearch.Windows.PictureLoading
                 Debug.WriteLine("File name: " + str);
             }
 
-            this.FilePaths = openFileDialog.FileNames;
-            this.FileNames = openFileDialog.SafeFileNames;
-
-            this.ViewModel.LoadImage(this.FilePaths[this.ViewModel.SelectedImageIndex]);
+            this.ViewModel.InitializeViewModel(openFileDialog.FileNames, openFileDialog.SafeFileNames);
         }
 
         private void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
+
+        private void PreviousImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.ViewModel.SelectedImageIndex - 1 >= 0)
+            {
+                this.ViewModel.SelectedImageIndex--;
+            }
+        }
+
+        private void NextImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.ViewModel.SelectedImageIndex + 1 < this.ViewModel.FilePaths.Length)
+            {
+                this.ViewModel.SelectedImageIndex++;
+            }
+        }
+
+        private void RemoveImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+        
     }
 }

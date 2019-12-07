@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DominantColoursSearch.Windows.PictureLoading"
         mc:Ignorable="d"
-        Title="Завантаження зображень" Height="465" Width="730" ResizeMode="CanMinimize"
+        Title="Завантаження зображень" Height="465" Width="760" ResizeMode="CanMinimize"
         d:DataContext="{d:DesignInstance local:PictureLoadingWindowViewModel}"
         Icon="/Images/colors-48.png"
         >
@@ -32,39 +32,43 @@
         <!--Next/Previous image buttons-->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 5 0 0">
             <Button Grid.Column="2" Width="35" Height="35" Background="Transparent" BorderThickness="0" 
-                                    VerticalAlignment="Center" HorizontalAlignment="Center">
-
+                                    VerticalAlignment="Center" HorizontalAlignment="Center" Click="PreviousImageButton_Click" >
                 <Image Source="/Images/left-arrow-64.png" />
-
             </Button>
-            <TextBlock Text="1/3" FontSize="20" Margin="10 0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock FontSize="20" Margin="10 0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}{0}/{1}" Mode="OneWay">
+                        <Binding Path="SelectedImageIndexDisplayText" />
+                        <Binding Path="NumberOfElements" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
             <Button Grid.Column="2" Width="35" Height="35" Background="Transparent" BorderThickness="0" 
-                                    VerticalAlignment="Center" HorizontalAlignment="Center">
-
+                                    VerticalAlignment="Center" HorizontalAlignment="Center" Click="NextImageButton_Click">
                 <Image Source="/Images/right-arrow-64.png" />
-
             </Button>
         </StackPanel>
 
         <!--Picture inforamtion-->
         <GroupBox Grid.Row="1" Header="Інформація про зображення" Margin="10" Padding="10" 
                   HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="13"
-                  MinWidth="300">
-            <StackPanel Orientation="Vertical">
+                  Width="380">
+            <StackPanel Orientation="Vertical" DataContext="{Binding SelectedImageInfo, Mode=OneWay}">
                 <!--Tmp-->
-                <TextBlock Text="Шлях до файлу: C:\Users\kovba\Desktop\Example1.jpg" Margin="3 3" FontSize="13"/>
+                <TextBox Text="{Binding PathToFile, Mode=OneWay, StringFormat=Шлях до файлу: {0}}" Margin="3 3" FontSize="13"
+                         IsReadOnly="True" IsReadOnlyCaretVisible="False" BorderThickness="0" Background="Transparent" TextWrapping="NoWrap"/>
                 <Separator />
-                <TextBlock Text="Назва файлу: Example1.jpg" Margin="3 3" FontSize="13"/>
+                <TextBox Text="{Binding Name, Mode=OneWay, StringFormat=Назва файлу: {0}}" Margin="3 3" FontSize="13"
+                         IsReadOnly="True" IsReadOnlyCaretVisible="False" BorderThickness="0" Background="Transparent" TextWrapping="NoWrap"/>
                 <Separator />
-                <TextBlock Text="Роздільна здатність зображення: 736x1308" Margin="3 3" FontSize="13"/>
+                <TextBlock Text="{Binding ResolutionText, Mode=OneWay, StringFormat=Роздільна здатність зображення: {0}}" Margin="3 3" FontSize="13"/>
                 <Separator />
-                <TextBlock Text="Розширення: JPG" Margin="3 3" FontSize="13"/>
+                <TextBlock Text="{Binding Extension, Mode=OneWay, StringFormat=Розширення: {0}}" Margin="3 3" FontSize="13"/>
                 <Separator />
                 <Button Grid.Column="2" Width="30" Height="30" Background="Transparent" BorderThickness="0" 
-                                    VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 5 0 0">
-
+                        VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 5 0 0"
+                        Click="RemoveImageButton_Click">
                     <Image Source="/Images/trash-bin-48.png" />
-
                 </Button>
             </StackPanel>
         </GroupBox>
@@ -72,7 +76,8 @@
         <!--Image preview-->
         <Border Grid.Row="1" Grid.Column="2" Padding="10" Margin="0 0 15 0" BorderThickness="1" 
                 CornerRadius="4" BorderBrush="White" Background="LightSlateGray">
-            <Image Source="{Binding SelectedImage, Mode=OneWay}" Width="300" Height="300" Stretch="Uniform"/>
+            <Image x:Name="imageImagePreviewContainer" Source="{Binding SelectedImage, Mode=OneWay}" 
+                   Width="300" Height="300" Stretch="Uniform"/>
         </Border>
 
         <!--Control buttons-->
@@ -87,9 +92,7 @@
                     <TextBlock Text="Застосувати" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <Button Width="30" Height="30" Background="Transparent" BorderThickness="0" 
                             VerticalAlignment="Center" HorizontalAlignment="Center" >
-
                         <Image Source="/Images/checked-squere-40.png" />
-
                     </Button>
                 </StackPanel>
             </Button>

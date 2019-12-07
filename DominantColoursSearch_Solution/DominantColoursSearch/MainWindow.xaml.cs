@@ -49,7 +49,7 @@ namespace DominantColoursSearch
 
             this.PictureLoadingWindow.ShowDialog();
 
-            this.ViewModel.InitializeViewModel(this.PictureLoadingWindow.FilePaths, this.PictureLoadingWindow.FileNames, SetImageOnAnalysisCompleteEvent);
+            this.ViewModel.InitializeViewModel(this.PictureLoadingWindow.ViewModel.FilePaths, this.PictureLoadingWindow.ViewModel.FileNames, SetImageOnAnalysisCompleteEvent);
         }
 
         private void SetImageOnAnalysisCompleteEvent(object sender, EventArgs e)
