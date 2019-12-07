@@ -122,7 +122,7 @@ namespace DominantColoursSearch
 
         private void XmlExportMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            
+            this.ViewModel.XmlSerialization();
         }
 
         private void OptionsMenuItem_Click(object sender, RoutedEventArgs e)

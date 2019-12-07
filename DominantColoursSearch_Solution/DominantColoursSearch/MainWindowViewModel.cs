@@ -9,6 +9,8 @@ using DominantColoursSearch.DominantColoursAnalysis;
 using System.Windows.Media.Imaging;
 using NLog;
 using System.Diagnostics;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace DominantColoursSearch
 {
@@ -138,6 +140,26 @@ namespace DominantColoursSearch
                 this.Logger.Error(ex, "Error occurred in tasks with analyzers", null);
 
                 throw;
+            }
+        }
+
+        public void XmlSerialization()
+        {
+            XmlSerializer formatter = new XmlSerializer(typeof(ObservableCollection<DominantColoursAnalyzer>));
+
+            string outputPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Output");
+            if (!Directory.Exists(outputPath))
+            {
+                Directory.CreateDirectory(outputPath);
+            }
+            
+            string fileName = String.Format($"XmlExport({DateTime.Now}).xml").Replace(':', '-'); // TODO: tmp, improve this
+
+            using (FileStream fs = new FileStream(Path.Combine(outputPath, fileName), FileMode.OpenOrCreate))
+            {
+                Debug.WriteLine(Path.Combine(outputPath, fileName));
+
+                formatter.Serialize(fs, this.Analyzers);
             }
         }
 
