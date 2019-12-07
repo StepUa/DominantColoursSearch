@@ -37,7 +37,7 @@
                 <Image Source="/Images/left-arrow-64.png" />
 
             </Button>
-            <TextBlock Text="11/11" FontSize="20" Margin="10 0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Text="0/0" FontSize="20" Margin="10 0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <Button Grid.Column="2" Width="35" Height="35" Background="Transparent" BorderThickness="0" 
                                     VerticalAlignment="Center" HorizontalAlignment="Center">
 
@@ -52,13 +52,13 @@
                   MinWidth="300">
             <StackPanel Orientation="Vertical">
                 <!--Tmp-->
-                <TextBlock Text="Шлях до файлу: C:\Users\kovba\Desktop\test1.jpg" Margin="3 3" FontSize="13"/>
+                <TextBlock Text="Шлях до файлу: N/A" Margin="3 3" FontSize="13"/>
                 <Separator />
-                <TextBlock Text="Назва файлу: test1.jpg" Margin="3 3" FontSize="13"/>
+                <TextBlock Text="Назва файлу: N/A" Margin="3 3" FontSize="13"/>
                 <Separator />
-                <TextBlock Text="Роздільна здатність зображення: 650x334" Margin="3 3" FontSize="13"/>
+                <TextBlock Text="Роздільна здатність зображення: N/A" Margin="3 3" FontSize="13"/>
                 <Separator />
-                <TextBlock Text="Розширення: JPG" Margin="3 3" FontSize="13"/>
+                <TextBlock Text="Розширення: N/A" Margin="3 3" FontSize="13"/>
                 <Separator />
                 <Button Grid.Column="2" Width="30" Height="30" Background="Transparent" BorderThickness="0" 
                                     VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 5 0 0">
