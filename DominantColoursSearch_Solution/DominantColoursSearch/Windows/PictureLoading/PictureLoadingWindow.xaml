@@ -54,7 +54,6 @@
                   HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="13"
                   Width="380">
             <StackPanel Orientation="Vertical" DataContext="{Binding SelectedImageInfo, Mode=OneWay}">
-                <!--Tmp-->
                 <TextBox Text="{Binding PathToFile, Mode=OneWay, StringFormat=Шлях до файлу: {0}}" Margin="3 3" FontSize="13"
                          IsReadOnly="True" IsReadOnlyCaretVisible="False" BorderThickness="0" Background="Transparent" TextWrapping="NoWrap"/>
                 <Separator />
