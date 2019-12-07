@@ -90,6 +90,7 @@
     <Compile Include="Converters\BackgroungToForegroundCalculation.cs" />
     <Compile Include="CustomClasses\AnalyzedPictureInfo.cs" />
     <Compile Include="CustomClasses\DAL\DataAccessLayer.cs" />
+    <Compile Include="CustomClasses\ImageInfoContainer.cs" />
     <Compile Include="CustomClasses\PictureDominantColorInfoItem.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="Windows\PictureLoading\PictureLoadingWindowViewModel.cs" />
