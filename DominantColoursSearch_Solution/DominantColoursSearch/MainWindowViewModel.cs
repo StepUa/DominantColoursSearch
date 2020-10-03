@@ -148,12 +148,21 @@ namespace DominantColoursSearch
             XmlSerializer formatter = new XmlSerializer(typeof(ObservableCollection<DominantColoursAnalyzer>));
 
             string outputPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Output");
-            if (!Directory.Exists(outputPath))
+                
+            Directory.CreateDirectory(outputPath);
+
+            string fileName;
+            string fileNameTemplate = String.Format($"XmlExport({DateTime.Now.ToString("yyyy-MM-dd")})") + "[{0}]" + ".xml";
+
+            for (int fileNumber = 1; ; fileNumber++)
             {
-                Directory.CreateDirectory(outputPath);
+                fileName = String.Format(fileNameTemplate, fileNumber);
+                
+                if (!File.Exists(Path.Combine(outputPath, fileName)))
+                {
+                    break;
+                }
             }
-            
-            string fileName = String.Format($"XmlExport({DateTime.Now}).xml").Replace(':', '-'); // TODO: tmp, improve this
 
             using (FileStream fs = new FileStream(Path.Combine(outputPath, fileName), FileMode.OpenOrCreate))
             {
